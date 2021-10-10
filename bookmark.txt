@@ -1,0 +1,236 @@
+HTML :
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="bg-main">
+        <p class="text-white pt-3 pl-2">Hello <br />
+            <span class="first-head">Jane Doe</span>
+        </p>
+        <div class="bg-second">
+            <h1 class="text-center p-4 mt-3">Bookmark Your Favourite Sites</h1>
+            <form id="bookmarkForm">
+                <div class="first-container ml-4 mr-4 mb-4 pb-4">
+                    <div class=" pl-4 pr-4 pt-4 ">
+                        <label for="siteNameInput" class="first-label">SITE NAME</label>
+                        <input id="siteNameInput" type="text" placeholder="Enter site name" class="form-control" />
+                        <p id="siteNameErrMsg" class="first-error"></p>
+                    </div>
+                    <div class="pl-4 pt-2 pr-4 pb-4 ">
+                        <label for="siteUrlInput" class="first-label">SITE URL</label>
+                        <input id="siteUrlInput" type="text" placeholder="Enter site URL" class="form-control" />
+                        <p id="siteUrlErrMsg" class="first-error"></p>
+                    </div>
+                    <div class=" text-right pr-4 pb-2">
+                        <button id="submitBtn" class="btn btn-one" type="submit">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+
+            <ul id="bookmarksList">
+
+
+            </ul>
+            <!-- <div class="second-container ml-4 mr-4  mb-4 ">
+                <div class="d-flex flex-row justify-content-between ">
+                    <div class="d-flex flex-column justify-content-center">
+                        <p class="pl-3">Learning Portal</p>
+                    </div>
+                    <button class="btn btn-primary mr-3 mt-2 mb-2">Visit</button>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+
+
+CSS :
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+
+.bg-main {
+    background-color: #2d3a8c;
+    background-size: cover;
+    height: 100vh;
+    font-family: "Roboto";
+}
+
+.first-head {
+    font-size: 22px;
+    font-family: "Roboto";
+}
+
+.bg-second {
+    background-color: #ffffff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+}
+
+.first-label {
+    font-size: 12px;
+    color: #7b8794;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 20px;
+    color: #323f4b;
+}
+
+.first-container {
+    background-color: #f5f7fa;
+    border-radius: 20px;
+    border-color: #cbd2d9;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.first-error {
+    color: #dc3545;
+    font-size: 12px;
+}
+
+.visit-title {
+    font-weight: bold;
+    color: #323f4b;
+}
+
+.btn-one {
+    background-color: #21396c;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.second-container {
+    background-color: #f5f7fa;
+    border-radius: 15px;
+    border-color: #e4e7eb;
+    border-style: solid;
+    border-width: 1px;
+    list-style-type: none;
+}
+
+
+JAVASCRIPT :
+
+
+let bookmarks = [{
+    bookmarkId: "bookmark1",
+    name: "Learning Portal",
+    url: "https://learning.ccbp.in/",
+}, ];
+
+let formEl = document.getElementById("bookmarkForm");
+let nameInputEl = document.getElementById("siteNameInput");
+let siteUrlInputEl = document.getElementById("siteUrlInput");
+let btnEL = document.getElementById("submitBtn");
+let nameErrEl = document.getElementById("siteNameErrMsg");
+let urlErrEl = document.getElementById("siteUrlErrMsg");
+
+
+let bookmarkListEl = document.getElementById("bookmarksList");
+nameInputEl.addEventListener("change", function(event) {
+    if (nameInputEl.value === "") {
+        nameErrEl.textContent = "Required*";
+    } else {
+        nameErrEl.textContent = "";
+    }
+});
+siteUrlInputEl.addEventListener("change", function(event) {
+    if (siteUrlInputEl.value === "") {
+        urlErrEl.textContent = "Required*";
+    } else {
+        urlErrEl.textContent = "";
+    }
+});
+
+function submitFormData(bookmarks) {
+    let options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer 94916fd03fceaa151b1a6fa3cb7340ecf3d0d9b00b8ebb257794aa9f1578ad0c",
+        },
+        body: JSON.stringify(bookmarks)
+    };
+
+    let urlId = bookmarks.url;
+
+    fetch(urlId, options)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(jsonData) {
+            console.log(jsonData);
+            if (jsonData.code === 422) {
+                if (jsonData.data[0].message === "has already been taken") {
+                    urlErrEl.textContent = "Url Already Exists";
+                }
+            }
+        });
+}
+
+function createListItem() {
+    let listItemEl = document.createElement("li");
+    listItemEl.classList.add("second-container", "ml-4", "mr-4", "mb-4");
+    let divContainer = document.createElement("div");
+    divContainer.classList.add("d-flex", "flex-row", "justify-content-between");
+    listItemEl.appendChild(divContainer);
+    let secondDiv = document.createElement("div");
+    secondDiv.classList.add("d-flex", "flex-column", "justify-content-center");
+    divContainer.appendChild(secondDiv);
+    let paraName = document.createElement("p");
+    paraName.classList.add("pl-3", "pt-3", "visit-title");
+    paraName.textContent = nameInputEl.value;
+    secondDiv.appendChild(paraName);
+    let anchorEl = document.createElement("a");
+
+    anchorEl.href = siteUrlInputEl.value;
+    anchorEl.target = "_blank";
+    let buttonEl = document.createElement("button");
+    buttonEl.classList.add("btn", "btn-primary", "mr-3", "mt-2", "mb-2");
+    buttonEl.textContent = "Visit";
+    anchorEl.appendChild(buttonEl);
+    divContainer.appendChild(anchorEl);
+    bookmarkListEl.appendChild(listItemEl);
+}
+
+function checkName() {
+    if (nameInputEl.value === "") {
+        nameErrEl.textContent = "Required*";
+    } else {
+        nameErrEl.textContent = "";
+    }
+}
+
+function checkurl() {
+    if (siteUrlInputEl.value === "") {
+        urlErrEl.textContent = "Required*";
+    } else {
+        urlErrEl.textContent = "";
+    }
+}
+formEl.addEventListener("submit", function(event) {
+    event.preventDefault();
+    checkName();
+    checkurl();
+    createListItem();
+});
